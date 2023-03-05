@@ -1,15 +1,16 @@
 <h1>Start Your Personality Test</h1>
 
-<table>
-  <tbody>
-    <% @questions.each do |question| %>
-      <b><%= question.content %></b>
-      <br />
-      <% question.options.each do |option| %>
-        <b class="mb-2">Option: <%= option.content %> </b>
-        <br/>
-      <% end %>
-      <br />
+<div>
+  <% @questions.each do |question| %>
+    <b><%= question.content %></b>
+    <br />
+    <% question.options.each do |option| %>
+      <button class="mb-2 btn btn-outline-primary"><%= option.content %> </button>
+      <br/>
     <% end %>
-  </tbody>
-</table>
+    <br />
+  <% end %>
+</div>
+
+<%= will_paginate @questions %>
+<button>Submit Your Answers</button>
