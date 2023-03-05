@@ -11,21 +11,21 @@
     </div>
   <% end %>
   <div class="form-group mb-2">
-      <%= form.label :question, style: "display: block"  %>
-      <%= form.text_area :content, class:"form-control w-50"%>
+    <%= form.label :question, style: "display: block"  %>
+    <%= form.text_area :content, class:"form-control w-50"%>
   </div>
 
   <%= form.fields_for :options do |p| %>
-  <div class="d-flex w-100 align-items-center">
-    <div class=" mb-2 w-50">
-      <%= p.label :options, style: "display: block"  %>
-      <%= p.text_area :content, placeholder: "Add Answer", class:"form-control w-100"%>
-    </div>
-     <div class="mx-5" >
-     <%= p.label :type, style: "display: block"  %>
-      <%= p.select :option_type, Option.option_types.keys.to_a %>
-    </div>
+    <div class="d-flex w-100 align-items-center">
+      <div class=" mb-2 w-50">
+        <%= p.label :options, style: "display: block"  %>
+        <%= p.text_area :content, placeholder: "Add Answer", class:"form-control w-100"%>
       </div>
+      <div class="mx-5" >
+        <%= p.label :type, style: "display: block"  %>
+        <%= p.select :option_type, Option.option_types.keys.to_a %>
+      </div>
+    </div>
   <% end %>
 
   <div class="actions">
