@@ -1,1 +1,15 @@
-INDEX
+<h1>Start Your Personality Test</h1>
+
+<table>
+  <tbody>
+    <% @questions.each do |question| %>
+      <b><%= question.content %></b>
+      <br />
+      <% question.options.each do |option| %>
+        <b class="mb-2">Option: <%= option.content %> </b>
+        <br/>
+      <% end %>
+      <br />
+    <% end %>
+  </tbody>
+</table>
