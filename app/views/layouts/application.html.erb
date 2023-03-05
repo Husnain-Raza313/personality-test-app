@@ -11,8 +11,15 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <%= render 'layouts/bar' %>
+    <% if admin_signed_in? %>
+      <div class="mt-2 mx-2">
+        <button class="btn-success"><%= link_to "Logout" , destroy_admin_session_path, method: :delete, class: "btn btn-success" %></button>
+      </div>
+    <% end %>
+
+    <div class="mt-5 mx-3">
+      <%= yield %>
+    </div>
   </body>
 </html>
