@@ -1,5 +1,5 @@
 class Option < ApplicationRecord
-  belongs_to :question
+  belongs_to :question, optional: true
 
   enum option_type: { introvert: 0, extrovert: 1 }
 
