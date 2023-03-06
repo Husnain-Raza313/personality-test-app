@@ -30,7 +30,7 @@ class ActivitiesController < ApplicationController
   end
 
   def set_session
-    return unless session[:question_answer_ids].blank?
+    return if session[:question_answer_ids].present?
 
     session[:question_answer_ids] = HashWithIndifferentAccess.new
   end
@@ -39,17 +39,16 @@ class ActivitiesController < ApplicationController
     score = 0
     question_answer_ids = session[:question_answer_ids]
 
-    question_answer_ids.each do |key, value|
+    question_answer_ids.each do |_key, value|
       ans = Option.find_by(id: value)
       if ans.introvert?
-        score = score - 5
+        score -= 5
       elsif ans.extrovert?
-        score = score + 5
+        score += 5
       end
-
     end
 
-    return score < 0 ? "Introvert": "Extrovert"
+    score.negative? ? 'Introvert' : 'Extrovert'
   end
 
   def empty_cookies_and_session
@@ -57,5 +56,4 @@ class ActivitiesController < ApplicationController
     cookies.delete :question_id
     cookies.delete :answer_id
   end
-
 end
