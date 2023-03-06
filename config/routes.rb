@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
     unauthenticated do
       root 'home#index', as: :unauthenticated_root
+      post '/score', to: 'home#create', as: :score
     end
   end
 end

@@ -1,3 +1,4 @@
+<p id="notice"><%= notice %></p>
 <h1>Start Your Personality Test</h1>
 
 <div>
@@ -5,7 +6,7 @@
     <b><%= question.content %></b>
     <br />
     <% question.options.each do |option| %>
-      <button class="mb-2 btn btn-outline-primary"><%= option.content %> </button>
+      <button class="mb-2 btn btn-outline-primary" data-toggle="button" id="option-<%= option.id %>" onClick="addAnswer(<%= question.id %>,<%= option.id %>, <%= attempted_count %>,<%= params[:page] %>)"><%= option.content %> </button>
       <br/>
     <% end %>
     <br />
@@ -13,4 +14,4 @@
 </div>
 
 <%= will_paginate @questions %>
-<button>Submit Your Answers</button>
+ <button class="d-none" id="submitButton"><%= link_to 'Submit Answers', score_path(page: params[:page]), method: :post %></button>
