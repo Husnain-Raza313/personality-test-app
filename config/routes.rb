@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     end
 
     unauthenticated do
-      root 'devise/sessions#new', as: :unauthenticated_root
+      root 'activities#index', as: :unauthenticated_root
+      resources :activities, only: %i[create]
     end
   end
 end

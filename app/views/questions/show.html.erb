@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
 <h4>Question: <%= @question.content %> </h4>
-
 <% @question.options.each do |option| %>
   <b class="mb-2">Option: <%= option.content %> </b>
   <p>Type: <%= option.option_type %></p>
