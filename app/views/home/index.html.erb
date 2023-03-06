@@ -1,17 +1,26 @@
 <p id="notice"><%= notice %></p>
-<h1>Start Your Personality Test</h1>
+<h1 class="mb-2 d-flex justify-content-center align-items-center">Start Your Personality Test</h1>
 
-<div>
-  <% @questions.each do |question| %>
-    <b><%= question.content %></b>
-    <br />
-    <% question.options.each do |option| %>
-      <button class="mb-2 btn btn-outline-primary" data-toggle="button" id="option-<%= option.id %>" onClick="addAnswer(<%= question.id %>,<%= option.id %>, <%= attempted_count %>,<%= params[:page] %>)"><%= option.content %> </button>
-      <br/>
+<div class="d-flex justify-content-center align-items-center">
+  <div>
+    <% @questions.each do |question| %>
+      <b><%= question.content %></b>
+      <br />
+      <br />
+      <% question.options.each do |option| %>
+        <button class="mb-2 btn btn-outline-primary" data-toggle="button" id="option-<%= option.id %>" onClick="addAnswer(<%= question.id %>,<%= option.id %>, <%= attempted_count %>,<%= params[:page] %>)"><%= option.content %> </button>
+        <br/>
+      <% end %>
+      <br />
     <% end %>
-    <br />
-  <% end %>
+  </div>
 </div>
-
-<%= will_paginate @questions %>
- <button class="d-none" id="submitButton"><%= link_to 'Submit Answers', score_path(page: params[:page]), method: :post %></button>
+<div class="d-flex justify-content-center align-items-center flex-column">
+  <div class="apple_pagination">
+    <div class="page_info">
+      <%= page_entries_info @questions %>
+    </div>
+    <%= will_paginate @questions, :container => false %>
+  </div>
+  <button class="d-none btn btn-lg btn-outline-primary mt-5" id="submitButton"><%= link_to 'Submit Answers', score_path(page: params[:page]), method: :post %></button>
+</div>

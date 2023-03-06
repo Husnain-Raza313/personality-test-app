@@ -9,15 +9,14 @@ class HomeController < ApplicationController
 
   def create
     map_question_options
-    if session[:question_answer_ids].present? && session[:question_answer_ids].length == 4
-      result = calculate_score
-      session[:question_answer_ids] = nil
-      cookies.delete :question_id
-      cookies.delete :answer_id
-      redirect_to unauthenticated_root_url, notice: "You are an #{result}"
-    else
+    if session[:question_answer_ids].length < 4
       redirect_to unauthenticated_root_url(page: params[:page]), notice: 'Every Question should be answered'
+    else
+      result = calculate_score
+      empty_cookies_and_session
+      redirect_to unauthenticated_root_url, notice: "You are an #{result}"
     end
+
   end
 
   private
@@ -26,9 +25,6 @@ class HomeController < ApplicationController
     question_id = cookies[:question_id]
     answer_id = cookies[:answer_id]
     session[:question_answer_ids][question_id] = answer_id
-    # session[:question_answer_ids] = nil
-    # cookies.delete :question_id
-    # cookies.delete :answer_id
   end
 
   def set_session
@@ -40,6 +36,7 @@ class HomeController < ApplicationController
   def calculate_score
     score = 0
     question_answer_ids = session[:question_answer_ids]
+
     question_answer_ids.each do |key, value|
       ans = Option.find_by(id: value)
       if ans.introvert?
@@ -47,7 +44,16 @@ class HomeController < ApplicationController
       elsif ans.extrovert?
         score = score + 5
       end
+
     end
+    
     return score < 0 ? "Introvert": "Extrovert"
   end
+
+  def empty_cookies_and_session
+    session[:question_answer_ids] = nil
+    cookies.delete :question_id
+    cookies.delete :answer_id
+  end
+
 end
