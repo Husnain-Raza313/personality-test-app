@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HomeController < ApplicationController
+class ActivitiesController < ApplicationController
   before_action :set_session, only: %i[index]
   def index
     @questions = Question.paginate(page: params[:page], per_page: 1)
@@ -46,7 +46,7 @@ class HomeController < ApplicationController
       end
 
     end
-    
+
     return score < 0 ? "Introvert": "Extrovert"
   end
 

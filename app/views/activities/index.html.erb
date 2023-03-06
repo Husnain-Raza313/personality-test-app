@@ -22,5 +22,5 @@
     </div>
     <%= will_paginate @questions, :container => false %>
   </div>
-  <button class="d-none btn btn-lg btn-outline-primary mt-5" id="submitButton"><%= link_to 'Submit Answers', score_path(page: params[:page]), method: :post %></button>
+  <button class="d-none btn btn-lg btn-outline-primary mt-5" id="submitButton"><%= link_to 'Submit Answers', activities_path(page: params[:page]), method: :post %></button>
 </div>
