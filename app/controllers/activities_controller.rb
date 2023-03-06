@@ -9,7 +9,7 @@ class ActivitiesController < ApplicationController
 
   def create
     map_question_options
-    if session[:question_answer_ids].length < 4
+    if session[:question_answer_ids].length < max_questions
       flash[:danger] = 'Every Question should be answered'
     else
       result = calculate_score
@@ -56,4 +56,9 @@ class ActivitiesController < ApplicationController
     cookies.delete :question_id
     cookies.delete :answer_id
   end
+
+  def max_questions
+    Question.count
+  end
+
 end

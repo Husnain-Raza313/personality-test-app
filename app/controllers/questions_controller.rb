@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
-    4.times do
+    NO_OF_OPTIONS.times do
       @question.options.new
     end
   end
