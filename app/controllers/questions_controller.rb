@@ -22,24 +22,30 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     if @question.save
-      redirect_to question_url(@question), notice: 'Question was successfully created.'
+      flash.now[:success] = 'Question was successfully created.'
+      redirect_to question_url(@question)
     else
+      flash.now[:danger] = @question.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
     if @question.update(question_params)
-      redirect_to question_url(@question), notice: 'Question was successfully updated.'
+      flash[:success] = 'Question was successfully updated.'
+      redirect_to question_url(@question)
     else
+      flash.now[:danger] = @question.errors.full_messages.to_sentence
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     if @question.destroy
-      redirect_to questions_url, notice: 'Question was successfully destroyed.'
+      flash.now[:success] = 'Question was successfully destroyed.'
+      redirect_to questions_url
     else
+      flash.now[:danger] = @question.errors.full_messages.to_sentence
       render :index, status: :unprocessable_entity
     end
   end

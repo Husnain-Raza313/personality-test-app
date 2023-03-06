@@ -10,13 +10,15 @@ class ActivitiesController < ApplicationController
   def create
     map_question_options
     if session[:question_answer_ids].length < 4
-      redirect_to unauthenticated_root_url(page: params[:page]), notice: 'Every Question should be answered'
+      flash[:danger] = 'Every Question should be answered'
     else
       result = calculate_score
       empty_cookies_and_session
-      redirect_to unauthenticated_root_url, notice: "You are an #{result}"
+      flash[:success] = "You are an #{result}"
+      params[:page] = nil
     end
 
+    redirect_to unauthenticated_root_url(page: params[:page])
   end
 
   private

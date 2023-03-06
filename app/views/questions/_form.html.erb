@@ -1,15 +1,4 @@
 <%= form_with(model: question)  do |form| %>
-  <% if question.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
-
-      <ul>
-        <% question.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
   <div class="form-group mb-2">
     <%= form.label :question, style: "display: block"  %>
     <%= form.text_area :content, class:"form-control w-50"%>
