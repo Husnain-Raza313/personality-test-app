@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Steps For Running This Project Locally
 
-Things you may want to cover:
+* Clone this project
 
-* Ruby version
+* Go to the root directory of the project
 
-* System dependencies
+* Run <code>rails db:create db:migrate</code>
 
-* Configuration
+* Run <code>bundle</code>
 
-* Database creation
+* Run <code>yarn</code>
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+and that's all.
