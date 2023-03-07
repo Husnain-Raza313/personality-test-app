@@ -3,6 +3,8 @@
 class ActivitiesController < ApplicationController
   before_action :set_session, only: %i[index]
   def index
+    empty_cookies_and_session if params[:page].blank?
+
     @questions = Question.paginate(page: params[:page], per_page: 1)
     map_question_options if cookies[:question_id]
   end
