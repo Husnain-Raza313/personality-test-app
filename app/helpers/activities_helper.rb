@@ -1,5 +1,6 @@
-module ActivitiesHelper
+# frozen_string_literal: true
 
+module ActivitiesHelper
   def calculate_score
     score = 0
     question_answer_ids = session[:question_answer_ids]
@@ -10,7 +11,6 @@ module ActivitiesHelper
       elsif ans.extrovert?
         score += 5
       end
-     
     end
 
     score.negative? ? 'Introvert' : 'Extrovert'
