@@ -6,7 +6,7 @@
 
 * Go to the root directory of the project
 
-* Run <code>rails db:create db:migrate</code>
+* Run <code>rails db:create db:migrate db:seed</code>
 
 * Run <code>bundle</code>
 
