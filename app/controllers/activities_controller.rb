@@ -1,15 +1,23 @@
 # frozen_string_literal: true
 
 class ActivitiesController < ApplicationController
+  include ActivitiesHelper
+
   before_action :set_session, only: %i[index]
+
   def index
+    if params[:page].blank?
+      empty_cookies_and_session
+      max_questions
+    end
+
     @questions = Question.paginate(page: params[:page], per_page: 1)
     map_question_options if cookies[:question_id]
   end
 
   def create
     map_question_options
-    if session[:question_answer_ids].length < max_questions
+    if session[:question_answer_ids].length < session[:max_questions]
       flash[:danger] = 'Every Question should be answered'
     else
       result = calculate_score
@@ -35,22 +43,6 @@ class ActivitiesController < ApplicationController
     session[:question_answer_ids] = HashWithIndifferentAccess.new
   end
 
-  def calculate_score
-    score = 0
-    question_answer_ids = session[:question_answer_ids]
-
-    question_answer_ids.each do |_key, value|
-      ans = Option.find_by(id: value)
-      if ans.introvert?
-        score -= 5
-      elsif ans.extrovert?
-        score += 5
-      end
-    end
-
-    score.negative? ? 'Introvert' : 'Extrovert'
-  end
-
   def empty_cookies_and_session
     session[:question_answer_ids] = nil
     cookies.delete :question_id
@@ -58,7 +50,6 @@ class ActivitiesController < ApplicationController
   end
 
   def max_questions
-    Question.count
+    session[:max_questions] = Question.count
   end
-
 end
