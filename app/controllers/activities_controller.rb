@@ -4,6 +4,7 @@ class ActivitiesController < ApplicationController
   include ActivitiesHelper
 
   before_action :set_session, only: %i[index]
+  
   def index
     if params[:page].blank?
       empty_cookies_and_session

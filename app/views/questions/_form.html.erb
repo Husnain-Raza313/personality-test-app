@@ -3,7 +3,6 @@
     <%= form.label :question, style: "display: block"  %>
     <%= form.text_area :content, class:"form-control w-50"%>
   </div>
-
   <%= form.fields_for :options do |p| %>
     <div class="d-flex w-100 align-items-center">
       <div class=" mb-2 w-50">
@@ -16,7 +15,6 @@
       </div>
     </div>
   <% end %>
-
   <div class="actions">
     <%= form.submit %>
   </div>
