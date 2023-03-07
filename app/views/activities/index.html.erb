@@ -9,7 +9,7 @@
       <div class="btn-group-toggle w-100" data-toggle="buttons">
         <% question.options.each do |option| %>
           <label class="btn btn-outline-primary w-100 mb-2">
-            <input type="radio" name="options" id="option1" autocomplete="off" id="option-<%= option.id %>" onClick="setCookies(<%= question.id %>,<%= option.id %>, <%= attempted_count %>,<%= questions_count %>,<%= params[:page] %>)">
+            <input type="radio" name="options" id="option1" autocomplete="off" id="option-<%= option.id %>" onClick="setCookies(<%= question.id %>,<%= option.id %>,<%= session[:max_questions] %>,<%= params[:page] %>)">
             <%= option.content %>
           </label>
           <br/>
